@@ -81,7 +81,7 @@ TODO - NOT Supported
 
 ## Sample Use-Case
 
-### Download an article (WIP)
+### Download an article
 
 Get Article command exports a speficied article to the following structure.
 
@@ -100,7 +100,7 @@ meta_<atricle_id>.yaml contains the following information as same as https://dev
 ```
 ```
 
-### Donwload articles inside of a section (WIP)
+### Donwload articles inside of a section
 
 Get Section command exports articles in a speficied section to the following structure.
 
@@ -120,7 +120,7 @@ s_<section_id>_<locale>/
 
 ### Donwload articles inside of a category (WIP)
 
-Get Category command exports articles in a speficied category to the following structure.
+(not yet implemented) Get Category command exports articles in a speficied category to the following structure.
 
 ```
 $ zeng get category <category_id>
@@ -140,7 +140,7 @@ c_<category_id>/
 
 ### Donwload all article (WIP)
 
-Get Guide command exports all article.
+(not yet implemented) Get Guide command exports all article.
 
 ```
 $ zeng get guide

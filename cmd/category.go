@@ -31,7 +31,7 @@ var categoryGetCmd = &cobra.Command{
 	Short: "Get articles under Category",
 	Long:  `TBD`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("category called")
+		fmt.Println("not yet implemented")
 	},
 }
 
