@@ -1,7 +1,7 @@
 # zeng - Zendesk Guide Command Line Tool (Experimental)
 
 Zeng is a CLI to manage an article on Zendesk Guide.
-This tool is stil experimental. Commands on CLI might be changed dramatically.
+This tool is still experimental. Commands on CLI might be changed dramatically.
 
 # Installation
 
@@ -18,9 +18,14 @@ TBD
 ## Configuration
 
 ### Email / Password
-First, run the following command, then zeng stores the configuration to ~/.zeng/zeng.conf.
+First, run the following command and input your credentials, then zeng stores the configuration to ~/.zeng/zeng.conf.
 
 ```
+$ zeng configure
+```
+
+```
+$ zeng configure
 Using config file: /Users/takahashi/.zeng.yaml
 What is Zendesk Subdomain (subdomain.zendesk.com)?
 Enter a value: yourcompany
@@ -47,6 +52,7 @@ Limitation: If you enable 2-factor authentication, you need to use the following
 ### APIKEY
 
 ```
+$ zeng configure
 Using config file: /Users/takahashi/.zeng.yaml
 What is Zendesk Subdomain (subdomain.zendesk.com)?
 Enter a value: yourcompany

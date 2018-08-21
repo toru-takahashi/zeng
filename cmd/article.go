@@ -24,6 +24,7 @@ import (
 	"github.com/olekukonko/tablewriter"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+	yaml "gopkg.in/yaml.v2"
 )
 
 // articleGetCmd represents the article command
@@ -82,14 +83,38 @@ func runArticleGetCmd(cmd *cobra.Command, args []string) error {
 		return nil
 	}
 
-	outPath := fmt.Sprintf("%d.html", article.ID)
-	file, err := os.Create(outPath)
+	// Structure
+	// a_<article id>
+	// 		a_<article_id>_<locale>_<title>.html
+	//    meta_<article_id>_<locale>.yaml
+	dirPath := fmt.Sprintf("a_%d", article.ID)
+	if err := os.Mkdir(dirPath, 0777); err != nil {
+		panic(err)
+	}
+
+	bodyPath := fmt.Sprintf("%s/a_%d_%s_%s.html", dirPath, article.ID, article.Locale, article.Title)
+	metaPath := fmt.Sprintf("%s/meta_%d_%s.html", dirPath, article.ID, article.Locale)
+
+	file, err := os.Create(bodyPath)
 	if err != nil {
-		// File Error
+		return err
 	}
 	defer file.Close()
 	file.Write(([]byte)(article.Body))
-	fmt.Printf("Exported %s (%s)to %s\n", article.Title, article.Locale, outPath)
+	fmt.Printf("Exported article to %s\n", bodyPath)
+
+	metafile, err := os.Create(metaPath)
+	if err != nil {
+		return err
+	}
+	defer metafile.Close()
+	yml, err := yaml.Marshal(article)
+	if err != nil {
+		return err
+	}
+	metafile.Write(([]byte)(string(yml)))
+	fmt.Printf("Exported metadata to %s\n", metaPath)
+
 	return nil
 }
 
@@ -160,12 +185,11 @@ func runArticleListCmd(cmd *cobra.Command, args []string) error {
 		})
 	}
 	table.Render()
-	// fmt.Println(articles)
 
 	return nil
 }
 
-// ArticleGet is
+// ArticleGet is TBD
 func (client *Client) ArticleGet(ctx context.Context, apiRequest ArticleGetRequest) (*ArticleGetResponse, error) {
 	subPath := fmt.Sprintf("/%s/articles/%d.json", client.Locale, apiRequest.ID)
 
@@ -181,7 +205,7 @@ func (client *Client) ArticleGet(ctx context.Context, apiRequest ArticleGetReque
 		return nil, err
 	}
 
-	// Check status code here…
+	// TODO: Check status code here…
 
 	var apiResponse ArticleGetResponse
 	if err := decodeBody(httpResponse, &apiResponse); err != nil {
@@ -190,7 +214,7 @@ func (client *Client) ArticleGet(ctx context.Context, apiRequest ArticleGetReque
 	return &apiResponse, nil
 }
 
-// ArticleList is
+// ArticleList is TBD
 func (client *Client) ArticleList(ctx context.Context, apiRequest ArticleListRequest) (*ArticleListResponse, error) {
 	subPath := fmt.Sprintf("/%s/articles.json", client.Locale)
 
@@ -221,7 +245,7 @@ func (client *Client) ArticleList(ctx context.Context, apiRequest ArticleListReq
 		return nil, err
 	}
 
-	// Check status code here…
+	// TODO: Check status code here…
 
 	var apiResponse ArticleListResponse
 	if err := decodeBody(httpResponse, &apiResponse); err != nil {

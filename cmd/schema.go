@@ -2,27 +2,27 @@ package cmd
 
 // Article https://developer.zendesk.com/rest_api/docs/help_center/articles#show-article
 type Article struct {
-	ID               int      `json:"id"`
-	URL              string   `json:"url"`
-	HTMLURL          string   `json:"html_url"`
-	Title            string   `json:"title"`
-	Body             string   `json:"body"`
-	Locale           string   `json:"locale"`
-	SourceLocale     string   `json:"source_locale"`
-	AuthorID         int      `json:"author_id"`
-	CommentsDisabled bool     `json:"comments_disabled"`
-	OutdatedLocales  []string `json:"outdated_locales"`
-	Outdated         bool     `json:"outdated"`
-	LabelNames       string   `json:"lable_names"`
-	Draft            bool     `json:"draft"`
-	Promoted         bool     `json:"promoted"`
-	Position         int      `json:"position"`
-	VoteSum          int      `json:"vote_sum"`
-	VoteCount        int      `json:"vote_count"`
-	SectionID        int      `json:"section_id"`
-	CreatedAt        string   `json:"created_at"`
-	EditedAt         string   `json:"edited_at"`
-	UpdatedAt        string   `json:"updated_at"`
+	ID               int      `json:"id" yaml:"id"`
+	URL              string   `json:"url" yaml:"url"`
+	HTMLURL          string   `json:"html_url" yaml:"html_url"`
+	Title            string   `json:"title" yaml:"title"`
+	Body             string   `json:"body" yaml:"body"`
+	Locale           string   `json:"locale" yaml:"locale"`
+	SourceLocale     string   `json:"source_locale" yaml:"source_locale"`
+	AuthorID         int      `json:"author_id" yaml:"author_id"`
+	CommentsDisabled bool     `json:"comments_disabled" yaml:"comments_disabled"`
+	OutdatedLocales  []string `json:"outdated_locales" yaml:"outdated_locales"`
+	Outdated         bool     `json:"outdated" yaml:"outdated"`
+	LabelNames       string   `json:"lable_names" yaml:"lable_names"`
+	Draft            bool     `json:"draft" yaml:"draft"`
+	Promoted         bool     `json:"promoted" yaml:"promoted"`
+	Position         int      `json:"position" yaml:"position"`
+	VoteSum          int      `json:"vote_sum" yaml:"vote_sum"`
+	VoteCount        int      `json:"vote_count" yaml:"vote_count"`
+	SectionID        int      `json:"section_id" yaml:"section_id"`
+	CreatedAt        string   `json:"created_at" yaml:"created_at"`
+	EditedAt         string   `json:"edited_at" yaml:"edited_at"`
+	UpdatedAt        string   `json:"updated_at" yaml:"updated_at"`
 }
 
 // List options
@@ -78,17 +78,17 @@ type ArticleListResponse struct {
 
 // Category https://developer.zendesk.com/rest_api/docs/help_center/categories#show-category
 type Category struct {
-	ID           int    `json:"id"`
-	Name         string `json:"name"`
-	Description  string `json:"description"`
-	Locale       string `json:"locale"`
-	SourceLocale string `json:"source_locale"`
-	URL          string `json:"url"`
-	HTMLURL      string `json:"html_url"`
-	Outdated     bool   `json:"outdated"`
-	Position     int    `json:"position"`
-	CreatedAt    string `json:"created_at"`
-	UpdatedAt    string `json:"updated_at"`
+	ID           int    `json:"id" yaml:"id"`
+	Name         string `json:"name" yaml:"name"`
+	Description  string `json:"description" yaml:"description"`
+	Locale       string `json:"locale" yaml:"locale"`
+	SourceLocale string `json:"source_locale" yaml:"source_locale"`
+	URL          string `json:"url" yaml:"url"`
+	HTMLURL      string `json:"html_url" yaml:"html_url"`
+	Outdated     bool   `json:"outdated" yaml:"outdated"`
+	Position     int    `json:"position" yaml:"position"`
+	CreatedAt    string `json:"created_at" yaml:"created_at"`
+	UpdatedAt    string `json:"updated_at" yaml:"updated_at"`
 }
 
 // CategoryListRequest
@@ -114,20 +114,20 @@ type CategoryListResponse struct {
 
 // Section https://developer.zendesk.com/rest_api/docs/help_center/categories#show-category
 type Section struct {
-	ID            int    `json:"id"`
-	Name          string `json:"name"`
-	Description   string `json:"description"`
-	Locale        string `json:"locale"`
-	SourceLocale  string `json:"source_locale"`
-	URL           string `json:"url"`
-	HTMLURL       string `json:"html_url"`
-	CategoryID    int    `json:"category_id"`
-	Outdated      bool   `json:"outdated"`
-	Position      int    `json:"position"`
-	ManageableBy  string `json:"manageable_by"`
-	UserSegmentID int    `json:"user_segment_id"`
-	CreatedAt     string `json:"created_at"`
-	UpdatedAt     string `json:"updated_at"`
+	ID            int    `json:"id" yaml:"id"`
+	Name          string `json:"name" yaml:"name"`
+	Description   string `json:"description" yaml:"description"`
+	Locale        string `json:"locale" yaml:"locale"`
+	SourceLocale  string `json:"source_locale" yaml:"source_locale"`
+	URL           string `json:"url" yaml:"url"`
+	HTMLURL       string `json:"html_url" yaml:"html_url"`
+	CategoryID    int    `json:"category_id" yaml:"category_id"`
+	Outdated      bool   `json:"outdated" yaml:"outdated"`
+	Position      int    `json:"position" yaml:"position"`
+	ManageableBy  string `json:"manageable_by" yaml:"manageable_by"`
+	UserSegmentID int    `json:"user_segment_id" yaml:"user_segment_id"`
+	CreatedAt     string `json:"created_at" yaml:"created_at"`
+	UpdatedAt     string `json:"updated_at" yaml:"updated_at"`
 }
 
 // SectionListRequest

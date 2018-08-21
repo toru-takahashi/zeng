@@ -24,6 +24,7 @@ import (
 	"github.com/olekukonko/tablewriter"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+	yaml "gopkg.in/yaml.v2"
 )
 
 // sectionCmd represents the section command
@@ -189,22 +190,48 @@ func runSectionGetCmd(cmd *cobra.Command, args []string) error {
 		return nil
 	}
 
-	dirPath := fmt.Sprintf("./section-%d", sectionID)
+	// Structure
+	// s_<section_id>_<locale>/
+	//		a_<article id>/
+	//				a_<article_id>_<locale>_<title>.html
+	//				meta_<article_id>_<locale>.yaml
+	//		a_<article id>/
+	// 				a_<article_id>_<locale>_<title>.html
+	//				meta_<article_id>.yaml
+	dirPath := fmt.Sprintf("./s_%d_%s", sectionID, client.Locale)
 	if err := os.MkdirAll(dirPath, 0777); err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Printf("Exported Section %d (Total %d articles)to %s\n", sectionID, res.Count, dirPath)
+	fmt.Printf("Exported Section %d (Total %d articles) to %s\n", sectionID, res.Count, dirPath)
 
 	for _, v := range articles {
-		outPath := fmt.Sprintf("%s/%d.html", dirPath, v.ID)
-		file, err := os.Create(outPath)
-		if err != nil {
-			fmt.Println(err)
+		subPath := fmt.Sprintf("%s/a_%d", dirPath, v.ID)
+		if err := os.Mkdir(subPath, 0777); err != nil {
+			panic(err)
 		}
 
+		bodyPath := fmt.Sprintf("%s/a_%d_%s_%s.html", subPath, v.ID, v.Locale, v.Title)
+		metaPath := fmt.Sprintf("%s/meta_%d_%s.html", subPath, v.ID, v.Locale)
+
+		file, err := os.Create(bodyPath)
+		if err != nil {
+			return err
+		}
 		defer file.Close()
 		file.Write(([]byte)(v.Body))
+		fmt.Printf("Exported article to %s\n", bodyPath)
+
+		metafile, err := os.Create(metaPath)
+		if err != nil {
+			return err
+		}
+		defer metafile.Close()
+		yml, err := yaml.Marshal(v)
+		if err != nil {
+			return err
+		}
+		metafile.Write(([]byte)(string(yml)))
 	}
 	return nil
 }

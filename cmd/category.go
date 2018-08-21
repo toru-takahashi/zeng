@@ -25,7 +25,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// categoryCmd represents the category command
+// categoryGetCmd represents the category command
 var categoryGetCmd = &cobra.Command{
 	Use:   "category",
 	Short: "Get articles under Category",
@@ -35,7 +35,7 @@ var categoryGetCmd = &cobra.Command{
 	},
 }
 
-// articleListCmd represents the article command
+// categoryListCmd TBD
 var categoryListCmd = &cobra.Command{
 	Use:   "category",
 	Short: "List categories",
@@ -86,7 +86,7 @@ func runCategoryListCmd(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-// CategoryList
+// CategoryList is TBD
 func (client *Client) CategoryList(ctx context.Context, apiRequest CategoryListRequest) (*CategoryListResponse, error) {
 	subPath := fmt.Sprintf("/%s/categories.json", client.Locale)
 
@@ -108,7 +108,7 @@ func (client *Client) CategoryList(ctx context.Context, apiRequest CategoryListR
 		return nil, err
 	}
 
-	// Check status code here…
+	// TODO: Check status code here…
 
 	var apiResponse CategoryListResponse
 	if err := decodeBody(httpResponse, &apiResponse); err != nil {
