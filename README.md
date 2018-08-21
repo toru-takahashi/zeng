@@ -7,7 +7,10 @@ This tool is still experimental. Commands on CLI might be changed dramatically.
 
 ## Mac
 
-TBD
+```
+brew tap toru-takahashi/zeng
+brew install zeng
+```
 
 ## Windows
 
